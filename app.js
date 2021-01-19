@@ -8,17 +8,16 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-const adminData = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const rootDir = require('./util/path');
 
 //middleware for parsing bodies from URL. 
 app.use(bodyParser.urlencoded({extended: false}));
-
 //allows me to serve static pages for the css
 app.use(express.static(path.join(rootDir, 'public')));
 
-app.use('/admin', adminData.routes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 //default path of app.use is /
