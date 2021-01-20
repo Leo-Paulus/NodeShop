@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const errorController = require('./controllers/error');
+
 const app = express();
 
 //allows us to set a global configuration value, that can be read trough app.get
@@ -21,8 +23,6 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 //default path of app.use is /
-app.use((req, res, next) => {
-    res.status(404).render('404', { pageTitle:'Page Not Found'});
-});
+app.use(errorController.get404);
 
 app.listen(3000);
